@@ -1,38 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Client name="iOS">
-  <!-- Author: Plex Inc. -->
-  <!-- This profile is used by A10X (and later) iOS (2017+) devices using the MPV ("experimental") video player. Currently, this requires a Plex Pass subscription. -->
-  <!-- Because Plex does not currently support TrueHD or DTS-MA playback in the client, this audio is transcoded to FLAC. -->  
-  <Settings>
-    <Setting name="DirectPlayStreamSelection" value="true" />
-    <Setting name="StreamUnselectedIncompatibleAudioStreams" value="true" />
-  </Settings>
   <TranscodeTargets>
-    <VideoProfile container="mkv" codec="h264,h265" audioCodec="flac" />
-    <MusicProfile container="flac" codec="flac" />
+    <VideoProfile protocol="hls" container="mpegts" codec="h264" audioCodec="aac" context="streaming" />
+    <VideoProfile container="mp4" codec="h264" audioCodec="aac" context="static" />
+    <MusicProfile container="mp3" codec="mp3" id="StereoMusicTranscodeProfile" />
     <PhotoProfile container="jpeg" />
-    <SubtitleProfile container="webvtt" subtitleCodec="webvtt"/>
   </TranscodeTargets>
   <DirectPlayProfiles>
-    <VideoProfile container="mkv,mov,mp4,mpegts,mpeg,mpegvideo,avi,flv,ogg" codec="h264,hevc,vp8,vp9,h263,mpeg1video,mpeg2video,mpeg4,vc1" audioCodec="aac,aac_latm,ac3,alac,flac,dca,vorbis,opus,eac3,mp1,mp2,mp3" subtitleCodec="ass,dvb_subtitle,vobsub,eia_608,pgs,microdvd,movtext,ssa,srt" />
+    <VideoProfile container="mp4" codec="*" audioCodec="*" />
+    <VideoProfile container="mkv" codec="*" audioCodec="*" />
+    <MusicProfile container="mp4" codec="aac" />
     <MusicProfile container="mp3" codec="mp3" />
-    <MusicProfile container="m4a" codec="aac,alac" />
-    <MusicProfile container="mp4" codec="aac,he-aac,ac3,eac3,alac" />
-    <MusicProfile container="flac,mkv" codec="flac" />
-    <PhotoProfile container="jpeg" />
+    <MusicProfile container="flac" codec="flac" />
+    <MusicProfile container="ogg" codec="vorbis" />
+    <PhotoProfile container="jpeg,gif,bmp,png" />
   </DirectPlayProfiles>
+  <ContainerProfiles>
+  </ContainerProfiles>
   <CodecProfiles>
-  <VideoCodec name="*">
-     <Limitations>
-       <UpperBound name="video.width" value="3840" />
-       <UpperBound name="video.height" value="2160" />
-       <UpperBound name="video.bitDepth" value="10" />
-     </Limitations>
-    </VideoCodec>
-    <VideoAudioCodec name="*">
-      <Limitations>
-        <UpperBound name="audio.channels" value="2" onlyTranscodes="true" />
-      </Limitations>
-    </VideoAudioCodec>
   </CodecProfiles>
 </Client>
